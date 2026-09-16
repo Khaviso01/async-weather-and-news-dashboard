@@ -25,3 +25,12 @@ export function httpGetCallback(
     })
     .on("error", (err) => callback(err));
 }
+
+export function httpGetPromise(url: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    httpGetCallback(url, (err, data) => {
+      if (err) reject(err);
+      else resolve(data as string);
+    });
+  });
+}
