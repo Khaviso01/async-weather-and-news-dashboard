@@ -79,30 +79,7 @@ weather and news are fetched for that location.
 
 If the name can't be found, you'll see a clean error and the script exits. Just run it again and try another spelling.
 
-## 4. Running the dashboard
-
-No build step needed — it's a single static HTML file.
-
-```bash
-open dashboard/index.html      # macOS
-# or just double-click it / drag it into a browser
-```
-
-In the dashboard you can:
-
-- Switch between **callback / promise / async-await** tabs and press **Run
-  fetch** — the execution trace panel shows each step with a timestamp and,
-  in callback mode, visibly increasing indentation as the news request
-  nests inside the weather callback.
-- Press **Promise.all()** to fire both requests at once and see them land
-  together.
-- Press **Promise.race()** to see which of the two endpoints answers first.
-- Type a city name and hit Enter (or tap **Use my location**) to change
-  which place the weather gauge reads.
-
----
-
-## 5. Sample console output
+## 4. Sample console output
 
 ### `npm run callback`
 
