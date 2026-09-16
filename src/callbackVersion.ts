@@ -18,6 +18,17 @@ function fetchWeatherCallback(
   });
 }
 
+function fetchNewsCallback(callback: (err: Error | null, data?: NewsResponse) => void): void {
+  httpGetCallback(NEWS_URL, (err, raw) => {
+    if (err) return callback(err);
+    try {
+      callback(null, JSON.parse(raw as string) as NewsResponse);
+    } catch (parseErr) {
+      callback(parseErr as Error);
+    }
+  });
+}
+
 function run(): void {
   console.log(`\n[callback] Fetching weather for ${DEFAULT_LOCATION.name}...`);
 

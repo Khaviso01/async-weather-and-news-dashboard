@@ -1,25 +1,28 @@
 {
-  "name": "async-weather-and-news-dashboard",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "async-weather-news-dashboard",
+  "version": "1.0.0",
+  "description": "Weather + News dashboard demonstrating callbacks, promises, and async/await over the Node.js event loop.",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
+    "build": "tsc",
+    "callback": "ts-node src/callbackVersion.ts",
+    "promise": "ts-node src/promiseVersion.ts",
+    "async": "ts-node src/asyncAwaitVersion.ts",
+    "test:all": "npm run callback && npm run promise && npm run async"
   },
-  "dependencies": {
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
-  },
+  "keywords": [
+    "async",
+    "event-loop",
+    "callbacks",
+    "promises",
+    "async-await",
+    "node"
+  ],
+  "author": "",
+  "license": "MIT",
   "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
-    "oxlint": "^1.81.0",
-    "typescript": "~6.0.2",
-    "vite": "^8.3.0"
+    "@types/node": "^20.19.43",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   }
 }
