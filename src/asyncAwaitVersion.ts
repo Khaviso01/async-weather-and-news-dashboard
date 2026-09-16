@@ -12,3 +12,11 @@ async function fetchNews(): Promise<NewsResponse> {
   return JSON.parse(raw) as NewsResponse;
 }
 
+function printWeather(weather: WeatherResponse): void {
+  console.log(`✓ [WEATHER] ${weather.current_weather.temperature}°C, wind ${weather.current_weather.windspeed} km/h`);
+}
+
+function printNews(news: NewsResponse): void {
+  console.log(`✓ [NEWS] ${news.posts.length} headlines received:`);
+  news.posts.forEach((post, i) => console.log(`   ${i + 1}. ${post.title}`));
+}
