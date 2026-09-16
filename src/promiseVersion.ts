@@ -39,11 +39,11 @@ function runAll(): Promise<void> {
     fetchNewsPromise(),
   ])
     .then(([weather, news]) => {
-      console.log(`✓ Both resolved in ${Date.now() - start}ms`);
+      console.log(`Both resolved in ${Date.now() - start}ms`);
       printWeather(weather);
       printNews(news);
     })
-    .catch((err: Error) => console.error("✗ Promise.all failed (one request rejected):", err.message));
+    .catch((err: Error) => console.error("Promise.all failed (one request rejected):", err.message));
 }
 
 
@@ -58,9 +58,9 @@ function runRace(): Promise<void> {
     fetchNewsPromise().then((n) => ({ type: "news" as const, data: n })),
   ])
     .then((winner) => {
-      console.log(`✓ "${winner.type}" won the race in ${Date.now() - start}ms`);
+      console.log(`"${winner.type}" won the race in ${Date.now() - start}ms`);
     })
-    .catch((err: Error) => console.error("✗ Promise.race failed:", err.message));
+    .catch((err: Error) => console.error("Promise.race failed:", err.message));
 }
 
 async function run(): Promise<void> {

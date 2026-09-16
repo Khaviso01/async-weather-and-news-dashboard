@@ -24,7 +24,7 @@ function run(): void {
   // Nested sequential calls this pyramid shape is "callback hell
   fetchWeatherCallback(DEFAULT_LOCATION.latitude, DEFAULT_LOCATION.longitude, (weatherErr, weather) => {
     if (weatherErr) {
-      console.error("✗ [WEATHER]", weatherErr.message);
+      console.error("[WEATHER]", weatherErr.message);
       return;
     }
 
@@ -33,11 +33,11 @@ function run(): void {
 
     fetchNewsCallback((newsErr, news) => {
       if (newsErr) {
-        console.error("✗ [NEWS]", newsErr.message);
+        console.error("[NEWS]", newsErr.message);
         return;
       }
 
-      console.log(`✓ [NEWS] ${news!.posts.length} headlines received:`);
+      console.log(`[NEWS] ${news!.posts.length} headlines received:`);
       news!.posts.forEach((post, i) => console.log(`   ${i + 1}. ${post.title}`));
 
       // A third, further-nested step to make the pyramid unmistakable.
