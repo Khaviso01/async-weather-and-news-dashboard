@@ -1,29 +1,17 @@
 # Async Weather & News Dashboard
 
 A small project built to demonstrate the three ways JavaScript/TypeScript
-handle asynchronous work — **callbacks**, **promises**, and **async/await** 
+handle asynchronous work - **callbacks**, **promises**, and **async/await** 
 using two real public APIs:
 
-- **Weather** — [Open-Meteo](https://open-meteo.com/) (`current_weather`, no API key needed)
-- **News headlines** — [DummyJSON Posts](https://dummyjson.com/posts) (no API key needed)
+- **Weather**: [Open-Meteo](https://open-meteo.com/) (`current_weather`, no API key needed)
+- **News headlines**: [DummyJSON Posts](https://dummyjson.com/posts) (no API key needed)
 
-# Async Weather & News Dashboard
+It ships using:
 
-A small project built to demonstrate the three ways JavaScript/TypeScript
-handle asynchronous work - **callbacks**, **promises**, and **async/await**
-— using two real public APIs:
-
-- **Weather** — [Open-Meteo](https://open-meteo.com/) (`current_weather`, no API key needed)
-- **News headlines** — [DummyJSON Posts](https://dummyjson.com/posts) (no API key needed)
-
-It ships in two parts:
-
-1. **A Node.js + TypeScript CLI** (`src/`) — three standalone scripts, one per
+**A Node.js + TypeScript CLI** (`src/`):  three standalone scripts, one per
    async style, runnable with `npm run callback|promise|async`.
-2. **A browser dashboard** (`dashboard/index.html`) — a single-file, fully
-   responsive UI that runs the same three styles live, plus `Promise.all()`
-   and `Promise.race()`, with a terminal-style execution trace so you can
-   *watch* the event loop work.
+
 
 ---
 
@@ -88,7 +76,7 @@ open dashboard/index.html      # macOS
 In the dashboard you can:
 
 - Switch between **callback / promise / async-await** tabs and press **Run
-  fetch** — the execution trace panel shows each step with a timestamp and,
+  fetch** - the execution trace panel shows each step with a timestamp and,
   in callback mode, visibly increasing indentation as the news request
   nests inside the weather callback.
 - Press **Promise.all()** to fire both requests at once and see them land
@@ -105,9 +93,9 @@ In the dashboard you can:
 
 ```
 [callback] Fetching weather for Polokwane, Limpopo...
-✓ [WEATHER] 22.4°C, wind 11.3 km/h
+[WEATHER] 22.4°C, wind 11.3 km/h
 [callback] Weather done, now fetching news (nested)...
-✓ [NEWS] 5 headlines received:
+[NEWS] 5 headlines received:
    1. His mother had always taught him
    2. Historically, most enterprise-level applications
    3. She had always loved the smell of ...
@@ -120,51 +108,47 @@ In the dashboard you can:
 
 ```
 [promise] Chained: weather -> news for Polokwane, Limpopo
-✓ [WEATHER] 22.4°C, wind 11.3 km/h
-✓ [NEWS] 5 headlines received:
+[WEATHER] 22.4°C, wind 11.3 km/h
+[NEWS] 5 headlines received:
    1. ...
    5. ...
 
 [promise] Promise.all(): weather + news simultaneously
-✓ Both resolved in 184ms
-✓ [WEATHER] 22.4°C, wind 11.3 km/h
-✓ [NEWS] 5 headlines received:
+Both resolved in 184ms
+[WEATHER] 22.4°C, wind 11.3 km/h
+[NEWS] 5 headlines received:
    ...
 
 [promise] Promise.race(): whichever of weather/news answers first
-✓ "news" won the race in 97ms
+"news" won the race in 97ms
 ```
 
 ### `npm run async`
 
 ```
 [async] Sequential: weather -> news for Polokwane, Limpopo
-✓ [WEATHER] 22.4°C, wind 11.3 km/h
-✓ [NEWS] 5 headlines received:
+[WEATHER] 22.4°C, wind 11.3 km/h
+[NEWS] 5 headlines received:
    ...
 
 [async] Promise.all(): weather + news simultaneously
-✓ Both resolved in 176ms
+Both resolved in 176ms
 ...
 
 [async] Promise.race(): whichever of weather/news answers first
-✓ "weather" won the race in 88ms
+"weather" won the race in 88ms
 ```
 
-*(Exact temperatures, headlines, and timings vary run to run — these are
-illustrative of the shape of the output, not fixed values.)*
+NOTE: Exact temperatures, headlines, and timings vary run to run — these are
+illustrative of the shape of the output, not fixed values.
 
-### Simulated failure (e.g. no network / DNS blocked)
-
-Every version reports errors the same way, because they all bottom out in
-the same `httpGetCallback` / `httpGetPromise` functions:
-
+### Simulated failure
 ```
-✗ [WEATHER] Request failed with status 500 for https://api.open-meteo.com/...
+[WEATHER] Request failed with status 500 for https://api.open-meteo.com/...
 ```
 or
 ```
-✗ Promise.all failed (one request rejected): getaddrinfo ENOTFOUND api.open-meteo.com
+Promise.all failed (one request rejected): getaddrinfo ENOTFOUND api.open-meteo.com
 ```
 
 ---
