@@ -6,3 +6,9 @@ async function fetchWeather(lat: number, lon: number): Promise<WeatherResponse> 
   const raw = await httpGetPromise(WEATHER_URL(lat, lon));
   return JSON.parse(raw) as WeatherResponse;
 }
+
+async function fetchNews(): Promise<NewsResponse> {
+  const raw = await httpGetPromise(NEWS_URL);
+  return JSON.parse(raw) as NewsResponse;
+}
+
