@@ -15,6 +15,33 @@ function printWeather(weather: WeatherResponse): void {
 }
 
 function printNews(news: NewsResponse): void {
-  console.log(`✓ [NEWS] ${news.posts.length} headlines received:`);
+  console.log(`[NEWS] ${news.posts.length} headlines received:`);
   news.posts.forEach((post, i) => console.log(`   ${i + 1}. ${post.title}`));
+}
+
+// 
+function runChained(): Promise<void> {
+  console.log(`\n[promise] Chained: weather -> news for ${DEFAULT_LOCATION.name}`);
+  return fetchWeatherPromise(DEFAULT_LOCATION.latitude, DEFAULT_LOCATION.longitude)
+    .then((weather) => {
+      printWeather(weather);
+      return fetchNewsPromise();
+    })
+    .then((news) => printNews(news))
+    .catch((err: Error) => console.error("✗ chained pipeline failed:", err.message));
+}
+
+function runAll(): Promise<void> {
+  console.log(`\n[promise] Promise.all(): weather + news simultaneously`);
+  const start = Date.now();
+  return Promise.all([
+    fetchWeatherPromise(DEFAULT_LOCATION.latitude, DEFAULT_LOCATION.longitude),
+    fetchNewsPromise(),
+  ])
+    .then(([weather, news]) => {
+      console.log(`✓ Both resolved in ${Date.now() - start}ms`);
+      printWeather(weather);
+      printNews(news);
+    })
+    .catch((err: Error) => console.error("✗ Promise.all failed (one request rejected):", err.message));
 }
