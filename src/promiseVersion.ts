@@ -45,3 +45,28 @@ function runAll(): Promise<void> {
     })
     .catch((err: Error) => console.error("✗ Promise.all failed (one request rejected):", err.message));
 }
+
+
+function runRace(): Promise<void> {
+  console.log(`\n[promise] Promise.race(): whichever of weather/news answers first`);
+  const start = Date.now();
+  return Promise.race([
+    fetchWeatherPromise(DEFAULT_LOCATION.latitude, DEFAULT_LOCATION.longitude).then((w) => ({
+      type: "weather" as const,
+      data: w,
+    })),
+    fetchNewsPromise().then((n) => ({ type: "news" as const, data: n })),
+  ])
+    .then((winner) => {
+      console.log(`✓ "${winner.type}" won the race in ${Date.now() - start}ms`);
+    })
+    .catch((err: Error) => console.error("✗ Promise.race failed:", err.message));
+}
+
+async function run(): Promise<void> {
+  await runChained();
+  await runAll();
+  await runRace();
+}
+
+run();
